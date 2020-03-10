@@ -1,0 +1,15 @@
+
+
+.letters-grid {
+    width: 60%;
+    /* background-color: #050505; */
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.letter {
+    margin: 10px;
+    background-color: #818181;
+    text-align: center;
+}
+
