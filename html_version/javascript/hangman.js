@@ -14,28 +14,38 @@ const words = [
     "python"
     ];
 
-const tries = 6;
-var timesLeft = tries;
+function Hangman() {
+    const tries = 6;
+    var timesLeft = tries;
 
-var timesLeftNode = document.querySelector("#times-left")
-timesLeftNode.textContent = "Times Left:   " + tries;
+    var timesLeftNode = document.querySelector("#times-left")
+    timesLeftNode.textContent = "Times Left:   " + tries;
 
-var randomNum = Math.floor(Math.random() * words.length);
-const word = words[randomNum];
-console.log(word);
-var wordTemp = word;
-var wordLength = word.length;
+    var randomNum = Math.floor(Math.random() * words.length);
+    const word = words[randomNum];
+    console.log(word);
+    var wordTemp = word;
+    var wordLength = word.length;
 
-var showWord = '_'.repeat(wordLength).split('');
-var showWordNode = document.querySelector("#show-word");
-showWordNode.textContent = "Show Word:   " + showWord.join(" ");
+    var showWord = '_'.repeat(wordLength).split('');
+    var showWordNode = document.querySelector("#show-word");
+    showWordNode.textContent = "Show Word:   " + showWord.join(" ");
 
-var lettersNode = document.querySelectorAll(".letter");
+    var lettersGrid = document.querySelector(".letters-grid");
+    lettersGrid.textContent = "";
+    for(var i = 0; i < 26; i++) {
+        var button = document.createElement("button");
+        button.classList.add("letter");
+        button.textContent = String.fromCharCode("a".charCodeAt(0) + i);
+        lettersGrid.appendChild(button);
+    }
 
-for (var i = 0; i < lettersNode.length; i++) {
-    lettersNode[i].addEventListener("click", function() {
-        var input = this.textContent.toLowerCase();
-        this.setAttribute("disabled", "true");
+    var lettersNode = document.querySelectorAll(".letter");
+
+    for (var i = 0; i < lettersNode.length; i++) {
+        lettersNode[i].addEventListener("click", function() {
+            var input = this.textContent.toLowerCase();
+            this.setAttribute("disabled", "true");
             if (wordTemp.includes(input)) {
                 var index = wordTemp.indexOf(input);
                 do {
@@ -48,34 +58,22 @@ for (var i = 0; i < lettersNode.length; i++) {
 
                 showWordNode.textContent = "Show Word:   " + showWord.join(" ");
 
-
                 if (wordLength <= 0) {
-                    confirm("You Win!");
+                    if (confirm("You Win, Do you want to try again?")) {
+                        Hangman();
+                    }
                 }
             } else {
                 timesLeft -= 1;
                 timesLeftNode.textContent = "Times Left:   " + timesLeft;
                 if (timesLeft <= 0) {
-                    confirm("You lose!");
+                    if (confirm("You Lose, Do you want to try again?")) {
+                        Hangman();
+                    }
                 }
             }
-
-    });
+        });
+    }
 }
 
-// while (true) {
-//     console.log("Pls guess the word");
-
-//     
-//     console.log(word);
-//     
-//     var lettersLeft = letters.slice();
-//     
-//     
-//     while (timesLeft > 0) {
-//         console.log(showWord.join(' '));
-//         console.log("Pls choose a letter from \n" + lettersLeft.join(", "));
-//         console.log(timesLeft + " times left");
-
-//     }
-// }
+Hangman();
