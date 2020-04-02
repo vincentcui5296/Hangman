@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "lib": ["dom", "es5", "es2015", "es2016"]
+    },
+    "files": [
+        "hangman.ts"
+    ]
+}
