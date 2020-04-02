@@ -14,7 +14,7 @@ const words = [
     "python"
     ];
 
-function Hangman() {
+function Hangman(): void {
     const tries = 6;
     let timesLeft = tries;
 
